@@ -3,6 +3,9 @@
 
 from flask import Flask, request, render_template
 import mysql.connector
+
+from createImdbDB import mycursor
+
 # mydb = mysql.connector.connect(
 #     host="localhost",
 #     database="iia_project",
@@ -23,7 +26,7 @@ def index():
 @app.route('/query/<string:queryNum>')
 def query(queryNum):
 
-    queryParams = request.args.get('queryParam')  # movie name etc.
+    queryParams = request.args.get('movie_name')  # movie name etc.
     # get query from queryNum
    # this corresponds to the queries present in the index page
     queries = [
@@ -44,15 +47,15 @@ def query(queryNum):
     print(queryNum)
     # query = "SELECT * FROM TMDBMovie WHERE title LIKE '%{}%'".format(queryParam)
 
-    # mycursor.execute(query["query"])
-    # data = mycursor.fetchall()
+    mycursor.execute(query["query"])
+    data = mycursor.fetchall()
     # run query with params based on query number and then return data
-    data = [
-        ["title", "original_title", "release_date", "runtime", "is_adult", "imdb_link", "overview",
-            "popularity", "poster_path", "collection_belongs_to", "revenue", "budget", "tagline", "homepage_link"],
-        ["title", "original_title", "release_date", "runtime", "is_adult", "imdb_link", "overview",
-            "popularity", "poster_path", "collection_belongs_to", "revenue", "budget", "tagline", "homepage_link"],
-    ]  # dummy data and columns because my sql db stopped working (mac issue)
+    # data = [
+    #     ["title", "original_title", "release_date", "runtime", "is_adult", "imdb_link", "overview",
+    #         "popularity", "poster_path", "collection_belongs_to", "revenue", "budget", "tagline", "homepage_link"],
+    #     ["title", "original_title", "release_date", "runtime", "is_adult", "imdb_link", "overview",
+    #         "popularity", "poster_path", "collection_belongs_to", "revenue", "budget", "tagline", "homepage_link"],
+    # ]  # dummy data and columns because my sql db stopped working (mac issue)
     query_columns = ["title", "original_title", "release_date", "runtime", "is_adult", "imdb_link", "overview",
                      "popularity", "poster_path", "collection_belongs_to", "revenue", "budget", "tagline", "homepage_link"]
     return render_template('query.html', data=data, columns=query_columns, query_name=query["name"])
