@@ -1,3 +1,4 @@
+use iia_project;
 DROP VIEW IF EXISTS Movie;
 CREATE VIEW Movie AS (
     Select *

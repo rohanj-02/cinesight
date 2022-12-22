@@ -1,11 +1,13 @@
 DROP TABLE IF EXISTS IMDBMovie;
 CREATE TABLE IMDBMovie (
     id INT NOT NULL AUTO_INCREMENT,
+    primary_title VARCHAR(255),
     original_title VARCHAR(255),
     release_date DATE,
     runtime INT,
     is_adult BOOLEAN,
     imdb_link TEXT,
+    genres TEXT,
     PRIMARY KEY (id)
 );
 DROP TABLE IF EXISTS TMDBMovie;
@@ -21,8 +23,8 @@ CREATE TABLE TMDBMovie (
     popularity FLOAT,
     poster_path TEXT,
     collection_belongs_to TEXT,
-    revenue INT,
-    budget INT,
+    revenue FLOAT,
+    budget FLOAT,
     tagline TEXT,
     homepage_link TEXT,
     PRIMARY KEY (id)
@@ -37,7 +39,8 @@ CREATE TABLE IMDBPerson(
     known_for TEXT,
     imdb_link TEXT,
     PRIMARY KEY (id)
-) DROP TABLE IF EXISTS TMDBPerson;
+);
+DROP TABLE IF EXISTS TMDBPerson;
 CREATE TABLE TMDBPerson(
     id INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(255),
@@ -54,7 +57,18 @@ CREATE TABLE TMDBPerson(
     imdb_link TEXT,
     PRIMARY KEY (id)
 );
--- DROP TABLE IF EXISTS Movie;
+DROP TABLE IF EXISTS MovieReview;
+DROP TABLE IF EXISTS Movie_Crew;
+DROP TABLE IF EXISTS Person;
+DROP TABLE IF EXISTS Movie_Keywords;
+DROP TABLE IF EXISTS Movie_Genre;
+DROP TABLE IF EXISTS Genre;
+DROP TABLE IF EXISTS Movie_Language;
+DROP TABLE IF EXISTS Language;
+DROP TABLE IF EXISTS Movie_ProductionHouses;
+DROP TABLE IF EXISTS ProductionHouses;
+DROP TABLE IF EXISTS Keywords;
+DROP TABLE IF EXISTS Movie;
 -- CREATE TABLE Movie (
 --     id INT NOT NULL AUTO_INCREMENT,
 --     title VARCHAR(255),
@@ -73,46 +87,39 @@ CREATE TABLE TMDBPerson(
 --     homepage_link TEXT,
 --     PRIMARY KEY (id)
 -- );
--- DROP TABLE IF EXISTS Language;
 -- CREATE TABLE Language (
 --     id INT NOT NULL AUTO_INCREMENT,
 --     name VARCHAR(255),
 --     PRIMARY KEY (id)
 -- );
--- DROP TABLE IF EXISTS Movie_Language;
 -- CREATE TABLE Movie_Language (
 --     movie_id INT NOT NULL,
 --     language_id INT NOT NULL,
 --     FOREIGN KEY (movie_id) REFERENCES Movie(id),
 --     FOREIGN KEY (language_id) REFERENCES Language(id)
 -- );
--- DROP TABLE IF EXISTS Genre;
 -- CREATE TABLE Genre (
 --     id INT NOT NULL AUTO_INCREMENT,
 --     name VARCHAR(255),
 --     PRIMARY KEY (id)
 -- );
--- DROP TABLE IF EXISTS Movie_Genre;
 -- CREATE TABLE Movie_Genre (
 --     movie_id INT NOT NULL,
 --     genre_id INT NOT NULL,
 --     FOREIGN KEY (movie_id) REFERENCES Movie(id),
 --     FOREIGN KEY (genre_id) REFERENCES Genre(id)
 -- );
--- DROP TABLE IF EXISTS Keywords;
 -- CREATE TABLE Keywords (
 --     id INT NOT NULL AUTO_INCREMENT,
 --     name VARCHAR(255),
 --     PRIMARY KEY (id)
 -- );
--- DROP TABLE IF EXISTS Movie_Keywords;
 -- CREATE TABLE Movie_Keywords (
 --     movie_id INT NOT NULL,
 --     keyword_id INT NOT NULL,
 --     FOREIGN KEY (movie_id) REFERENCES Movie(id),
 --     FOREIGN KEY (keyword_id) REFERENCES Keywords(id)
 -- );
--- DROP TABLE IF EXISTS Person;
 -- CREATE TABLE Person (
 --     id INT NOT NULL AUTO_INCREMENT,
 --     name VARCHAR(255),
@@ -131,7 +138,6 @@ CREATE TABLE TMDBPerson(
 --     imdb_link TEXT,
 --     PRIMARY KEY (id)
 -- );
--- DROP TABLE IF EXISTS Movie_Crew;
 -- CREATE TABLE Movie_Crew (
 --     movie_id INT NOT NULL,
 --     person_id INT NOT NULL,
@@ -141,7 +147,6 @@ CREATE TABLE TMDBPerson(
 --     FOREIGN KEY (movie_id) REFERENCES Movie(id),
 --     FOREIGN KEY (person_id) REFERENCES Person(id)
 -- );
--- DROP TABLE IF EXISTS MovieReview;
 -- CREATE TABLE MovieReview (
 --     id INT NOT NULL AUTO_INCREMENT,
 --     movie_id INT NOT NULL,
@@ -157,7 +162,6 @@ CREATE TABLE TMDBPerson(
 --     FOREIGN KEY (movie_id) REFERENCES Movie(id),
 --     PRIMARY KEY (id)
 -- );
--- DROP TABLE IF EXISTS ProductionHouses;
 -- CREATE TABLE ProductionHouses (
 --     id INT NOT NULL AUTO_INCREMENT,
 --     name VARCHAR(255),
@@ -170,7 +174,6 @@ CREATE TABLE TMDBPerson(
 --     parent_company TEXT,
 --     PRIMARY KEY (id)
 -- );
--- DROP TABLE IF EXISTS Movie_ProductionHouses;
 -- CREATE TABLE Movie_ProductionHouses (
 --     movie_id INT NOT NULL,
 --     production_house_id INT NOT NULL,
