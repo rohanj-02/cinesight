@@ -1,19 +1,15 @@
-# uncomment all the lines with mydb and mycursor to connect to the database
-
-
 from flask import Flask, request, render_template
 import mysql.connector
 
-from createImdbDB import mycursor
 
-# mydb = mysql.connector.connect(
-#     host="localhost",
-#     database="iia_project",
-#     # user="root",
-#     # password="rootroot"
-# )
+mydb = mysql.connector.connect(
+    host="localhost",
+    database="iia_project",
+    user="root",
+    password="123456"
+)
 
-# mycursor = mydb.cursor()
+mycursor = mydb.cursor()
 app = Flask(__name__)
 
 

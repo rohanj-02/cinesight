@@ -1,6 +1,6 @@
 DROP TABLE IF EXISTS IMDBMovie;
 CREATE TABLE IMDBMovie (
-    id INT NOT NULL AUTO_INCREMENT,
+    mid INT NOT NULL AUTO_INCREMENT,
     primary_title VARCHAR(255),
     original_title VARCHAR(255),
     release_date DATE,
@@ -8,7 +8,7 @@ CREATE TABLE IMDBMovie (
     is_adult BOOLEAN,
     imdb_link TEXT,
     genres TEXT,
-    PRIMARY KEY (id)
+    PRIMARY KEY (mid)
 );
 DROP TABLE IF EXISTS TMDBMovie;
 CREATE TABLE TMDBMovie (
@@ -31,14 +31,14 @@ CREATE TABLE TMDBMovie (
 );
 DROP TABLE IF EXISTS IMDBPerson;
 CREATE TABLE IMDBPerson(
-    id INT NOT NULL AUTO_INCREMENT,
+    mid INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(255),
-    birthday DATE,
-    deathday DATE,
+    birthday YEAR,
+    deathday YEAR,
     primary_profession TEXT,
     known_for TEXT,
     imdb_link TEXT,
-    PRIMARY KEY (id)
+    PRIMARY KEY (mid)
 );
 DROP TABLE IF EXISTS TMDBPerson;
 CREATE TABLE TMDBPerson(
