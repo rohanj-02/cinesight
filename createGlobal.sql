@@ -1,10 +1,10 @@
 use iia_project;
 DROP VIEW IF EXISTS Movie;
+DROP TABLE IF EXISTS Person;
 CREATE VIEW Movie AS (
     Select *
     from TMDBMovie
 );
-DROP TABLE IF EXISTS Person;
 CREATE VIEW Person AS (
     Select *,
         i.primary_profession,
