@@ -34,7 +34,7 @@ def query(queryNum):
         },
         {
             # dummy query
-            "query": 'select title, release_date, runtime, overview, popularity, genres,rating,ratings from Movie where popularity>50 and rating>8.2 and ratings>4',
+            "query": "select title, release_date, runtime, overview, popularity, genres,rating 'IMDB Ratings',ratings 'MovieLens Rating' from Movie where popularity>50 and rating>8.2 and ratings>4",
             "name": "Query: Show all movies that are very famous across all platforms"
         },
         {
@@ -68,5 +68,5 @@ def query(queryNum):
     #     ["title", "original_title", "release_date", "runtime", "is_adult", "imdb_link", "overview",
     #         "popularity", "poster_path", "collection_belongs_to", "revenue", "budget", "tagline", "homepage_link"],
     # ]  # dummy data and columns because my sql db stopped working (mac issue)
-    query_columns = [['title', 'release_date', 'runtime', 'overview', 'popularity', 'genres','rating','ratings'],['title', 'release_date', 'runtime', 'overview', 'popularity', 'genres','rating','ratings'],['year', 'IMDB Average Ratings', 'Movielens Average Ratings','popularity'],['title', 'release_date', 'runtime', 'overview', 'popularity', 'genres','rating','ratings'],['title', 'release_date', 'runtime', 'overview', 'popularity', 'genres','rating','ratings']]
+    query_columns = [['title', 'release_date', 'runtime', 'overview', 'popularity', 'genres','rating','ratings'],['title', 'release_date', 'runtime', 'overview', 'popularity', 'genres','IMDB Ratings','MovieLens Ratings'],['year', 'IMDB Average Ratings', 'Movielens Average Ratings','popularity'],['title', 'release_date', 'runtime', 'overview', 'popularity', 'genres','rating','ratings'],['title', 'release_date', 'runtime', 'overview', 'popularity', 'genres','rating','ratings']]
     return render_template('query.html', data=data, columns=query_columns[int(queryNum)], query_name=query["name"])
