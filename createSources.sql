@@ -57,6 +57,36 @@ CREATE TABLE TMDBPerson(
     imdb_link TEXT,
     PRIMARY KEY (id)
 );
+DROP TABLE IF EXISTS IMDBRatings;
+CREATE TABLE IMDBRatings(
+    id TEXT,
+    rating FLOAT,
+    votes INTEGER,
+    PRIMARY KEY (id)
+);
+
+DROP TABLE IF EXISTS Mapping;
+CREATE TABLE Mapping(
+    movieId TEXT,
+    imDBId TEXT,
+    tmdbId TEXT
+);
+
+
+DROP TABLE IF EXISTS MovieRatings;
+CREATE TABLE MovieRatings(
+    uid TEXT,
+    mid TEXT,
+    rating INTEGER
+);
+
+DROP TABLE IF EXISTS IMDBRatings;
+CREATE TABLE IMDBRatings(
+    id TEXT,
+    rating FLOAT,
+    votes INTEGER,
+    PRIMARY KEY (id)
+);
 DROP TABLE IF EXISTS MovieReview;
 DROP TABLE IF EXISTS Movie_Crew;
 DROP TABLE IF EXISTS Person;

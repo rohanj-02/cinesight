@@ -26,6 +26,11 @@ mycursor = mydb.cursor()
 
 sql = "INSERT INTO TMDBMovie(title, original_title, release_date, runtime, is_adult, imdb_link, overview, popularity, poster_path, collection_belongs_to, revenue, budget, tagline, homepage_link) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
 
+ratingsql = "INSERT INTO IMDBRatings(imdb_link,rating,votes) VALUES (%s, %s, %s)"
+
+ratingmovie = "INSERT INTO MovieRatings(uid,mid,rating) VALUES (%s, %s, %s)"
+
+mappingsql = "INSERT INTO Mapping(movieid,imDBId,tmdbId) VALUES (%s, %s, %s)"
 
 imdbSQL = "INSERT INTO IMDBMovie(primary_title, original_title, release_date, runtime, is_adult, imdb_link, genres) VALUES (%s, %s, %s, %s, %s, %s, %s)"
 
@@ -69,59 +74,59 @@ imdbPerson = "INSERT INTO IMDBPerson(id, name, birthday, deathday, primary_profe
 #         mycursor.execute(imdbSQL, vals)
 #         mydb.commit()
 
-count = 0
-with open('data/tmdb/movie.tsv', 'r',encoding="utf8") as f:
-    reader = csv.reader(f, delimiter='\t')
-    # for each line in the file
-    for row in reader:
-
-        if count == 0:
-            count += 1
-            continue
-        # if count >= 1000:
-        #     break
-        print(count)
-        with open("ids.txt", "r") as file:
-            ids = eval(file.readline())
-        if row[1] not in ids:
-            continue
-        # get the movie id
-        count+=1
-        id = row[0]
-        film_id = row[1]
-        title = row[2]
-        isAdult = row[3]
-        backdrop_path = row[4]
-        budget = row[5]
-        homepage = row[6]
-        imdb_id = row[7]
-        original_language = row[8]
-        original_title = row[9]
-        overview = row[10]
-        popularity = row[11]
-        poster_path = row[12]
-        release_date = row[13]
-        revenue = row[14]
-        runtime = row[15]
-        vote_average = row[16]
-        vote_count = row[17]
-        status = row[18]
-        tagline = row[19]
-        collection_id = row[20]
-        isAdult = bool(isAdult)
-        if isAdult:
-            isAdult = 1
-        else:
-            isAdult = 0
-        try:
-            vals = (title, original_title, release_date, runtime, isAdult, imdb_id, overview,
-                    popularity, poster_path, collection_id, revenue, budget, tagline, homepage)
-
-            mycursor.execute(sql, vals)
-            mydb.commit()
-        except Exception as e:
-            print(e)
-            print(vals)
+# count = 0
+# with open('data/tmdb/movie.tsv', 'r',encoding="utf8") as f:
+#     reader = csv.reader(f, delimiter='\t')
+#     # for each line in the file
+#     for row in reader:
+#
+#         if count == 0:
+#             count += 1
+#             continue
+#         # if count >= 1000:
+#         #     break
+#         print(count)
+#         with open("ids.txt", "r") as file:
+#             ids = eval(file.readline())
+#         if row[1] not in ids:
+#             continue
+#         # get the movie id
+#         count+=1
+#         id = row[0]
+#         film_id = row[1]
+#         title = row[2]
+#         isAdult = row[3]
+#         backdrop_path = row[4]
+#         budget = row[5]
+#         homepage = row[6]
+#         imdb_id = row[7]
+#         original_language = row[8]
+#         original_title = row[9]
+#         overview = row[10]
+#         popularity = row[11]
+#         poster_path = row[12]
+#         release_date = row[13]
+#         revenue = row[14]
+#         runtime = row[15]
+#         vote_average = row[16]
+#         vote_count = row[17]
+#         status = row[18]
+#         tagline = row[19]
+#         collection_id = row[20]
+#         isAdult = bool(isAdult)
+#         if isAdult:
+#             isAdult = 1
+#         else:
+#             isAdult = 0
+#         try:
+#             vals = (title, original_title, release_date, runtime, isAdult, imdb_id, overview,
+#                     popularity, poster_path, collection_id, revenue, budget, tagline, homepage)
+#
+#             mycursor.execute(sql, vals)
+#             mydb.commit()
+#         except Exception as e:
+#             print(e)
+#             print(vals)
 
 # count = 0
 # with open('data/tmdb/PERSON.tsv', 'r',encoding='utf8') as f:
@@ -197,5 +202,73 @@ with open('data/tmdb/movie.tsv', 'r',encoding="utf8") as f:
 #             print(e)
 #             print(vals)
 
+# count = 0
+# with open('data/imdb/imdbreducedrating.csv', 'r',encoding="utf8") as f:
+#     reader = csv.reader(f, delimiter=',')
+#     # for each line in the file
+#     for row in reader:
+#
+#         if count == 0:
+#             count += 1
+#             continue
+#         print(count)
+#         count+=1
+#         imdb_link = row[0]
+#         rating = row[1]
+#         votes = row[2]
+#         try:
+#             vals = (imdb_link, rating, votes)
+#
+#             mycursor.execute(ratingsql, vals)
+#             mydb.commit()
+#         except Exception as e:
+#             print(e)
+#             print(vals)
+# print("Entry Complete")
+# count=0
+# with open('data/movielens/links.csv', 'r',encoding="utf8") as f:
+#     reader = csv.reader(f, delimiter=',')
+#     # for each line in the file
+#     for row in reader:
+#
+#         if count == 0:
+#             count += 1
+#             continue
+#         print(count)
+#         count+=1
+#         id = row[0]
+#         imDBId = 'tt'+row[1]
+#         tmdbId = row[2]
+#         try:
+#             vals = (id, imDBId, tmdbId)
+#
+#             mycursor.execute(mappingsql, vals)
+#             mydb.commit()
+#         except Exception as e:
+#             print(e)
+#             print(vals)
+# print("Entry Complete")
 
+count=0
+with open('data/movielens/ratings.csv', 'r',encoding="utf8") as f:
+    reader = csv.reader(f, delimiter=',')
+    # for each line in the file
+    for row in reader:
+
+        if count == 0:
+            count += 1
+            continue
+        print(count)
+        count+=1
+        uid = row[0]
+        mid = row[1]
+        rating = row[2]
+        try:
+            vals = (uid, mid, rating)
+
+            mycursor.execute(ratingmovie, vals)
+            mydb.commit()
+        except Exception as e:
+            print(e)
+            print(vals)
 print("Entry Complete")
