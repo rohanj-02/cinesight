@@ -39,13 +39,13 @@
     <p align="center">
       <!-- 1 Div = 1 Query -->
       <div>
-        <h3>Query: Recommend movies based on movie name</h3>
+        <h3>Query:Check Out Short Movies of your favourite genre</h3>
         <form action="/query/0" method="get">
-          <label for="movie_name">Movie Name: </label>
+          <label for="short_name">Genre Name: </label>
           <input
           type="text"
-          name="movie_name"
-          placeholder="Enter Movie Name"
+          name="genre"
+          placeholder="Enter your genre"
           style="height: 50px; width: 300px"
           />
           <input
@@ -62,8 +62,64 @@
 
       <!-- Query 2 -->
       <div>
-        <h3>Query: Show all movies</h3>
+        <h3>Query: Show all movies that are very famous across all platforms</h3>
         <form action="/query/1" method="get">
+
+          <input
+          type="submit"
+          value="Show"
+          class="grey"
+          style="height: 50px; width: 100px"
+          />
+
+        </form>
+        <br/>
+        <br/>
+      </div>
+
+      <!-- 1 Div = 3 Query -->
+      <div>
+        <h3>Query: Yearwise summary of ratings across different years</h3>
+        <form action="/query/2" method="get">
+
+          <input
+          type="submit"
+          value="Show"
+          class="grey"
+          style="height: 50px; width: 100px"
+          />
+
+        </form>
+        <br/>
+        <br/>
+      </div>
+
+      <!-- 1 Div = 4 Query -->
+      <div>
+        <h3>Query: Search movies using a keyword based filter</h3>
+        <form action="/query/3" method="get">
+          <label for="keyword_name">Keywords Entered: </label>
+          <input
+          type="text"
+          name="keyword"
+          placeholder="Enter your desired keywords"
+          style="height: 50px; width: 300px"
+          />
+          <input
+          type="submit"
+          value="Submit"
+          class="grey"
+          style="height: 50px; width: 100px"
+          />
+
+        </form>
+        <br/>
+        <br/>
+      </div>
+      <!-- 1 Div =5 Query -->
+      <div>
+        <h3>Query: Popular Movies that made a loss in the theatres</h3>
+        <form action="/query/4" method="get">
 
           <input
           type="submit"
